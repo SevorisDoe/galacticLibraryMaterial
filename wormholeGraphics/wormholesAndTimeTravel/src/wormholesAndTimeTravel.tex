@@ -1,0 +1,263 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic,algorithm}
+\usepackage{graphics,graphicx}
+\usepackage{pgfplots,tikz}
+\usepackage{enumerate}
+\usepackage{eurosym}
+\usepackage{hyperref}
+\usepackage{caption, subcaption}
+\usepackage{fixltx2e}
+\usepackage{xfrac}
+\usepackage{tikz}
+\usetikzlibrary{positioning,chains,fit,shapes,calc,snakes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{tikzmark}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{3d}
+\usetikzlibrary{patterns}
+
+
+\begin{document}
+
+\tdplotsetmaincoords{60}{140}
+
+\section{Graphics for wormhole and time travel}:
+\begin{figure}[h]
+\hspace{-3cm}
+  \begin{tikzpicture}[tdplot_main_coords]
+
+          % draw grid
+          \foreach \x in {-6.5,-6,...,6.5}
+          \foreach \y in {-6.5,-6,...,6.5}
+          {
+              \draw[very thin,Aquamarine!10] (\x,-7,0) -- (\x,7,0);
+              \draw[very thin,Aquamarine!10] (-7,\y,0) -- (7,\y,0);
+          }
+          % draw 100 Ly circle:
+          \draw[thick,Aquamarine!50] (0,0,0) circle (6);
+
+
+            \node[circle,fill, scale=1.5,label=below:Metropole] at (0,0,0) (R){};
+            \node[circle,fill, scale=1.5, label=right:$A$] at (xyz cylindrical cs: radius=6, angle=160,z=0) (A){};
+            \node[circle,fill, scale=1.5, label=left:$B$] at (xyz cylindrical cs: radius=6, angle=220,z=0) (B){};
+
+            \draw[thick,densely dotted] (R) -- node[right]{$d_{sp}(\text{Metropole},A) = 100$ Ly} (A);
+            \draw[thick,densely dotted] (R) -- node[below left]{$d_{sp}(\text{Metropole},B) = 100$ Ly} (B);
+            \draw[thick,densely dotted] (A) -- node[above right=5pt]{$d_{sp}(A,B) = 100$ Ly} (B);
+
+    \end{tikzpicture}
+\caption{Mentropole and its colonies A and B, in space-time}
+\end{figure}
+
+\begin{figure}[h]
+\hspace{-3cm}
+    \begin{tikzpicture}[tdplot_main_coords]
+
+            % draw grid
+            \foreach \x in {-6.5,-6,...,6.5}
+            \foreach \y in {-6.5,-6,...,6.5}
+            {
+                \draw[very thin,Aquamarine!10] (\x,-7,0) -- (\x,7,0);
+                \draw[very thin,Aquamarine!10] (-7,\y,0) -- (7,\y,0);
+            }
+            % draw 100 Ly circle:
+            \draw[thick,Aquamarine!50] (0,0,0) circle (6);
+
+
+            \node[circle,fill, scale=1.5,label=below:Metropole] at (0,0,0) (R){};
+            \node[circle,fill, scale=1.5, label=right:$A$] at (xyz cylindrical cs: radius=6, angle=160,z=0) (A){};
+            \node[circle,fill, scale=1.5, label=left:$B$] at (xyz cylindrical cs: radius=6, angle=220,z=0) (B){};
+    
+            \draw[thick,densely dotted] (R) -- (A);
+            \draw[thick,densely dotted] (R) -- (B);
+            \draw[thick,densely dotted] (A) -- (B);
+            
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,z=0) (w1){};
+            \node[circle,fill,Peach,minimum size=1mm, label=below right:\textcolor{Peach}{Wormhole 1}] at (xyz cylindrical cs: radius=1, angle=160,z=0) (w2){};
+            \draw[thick,Peach] (w1) -- (w2);
+            
+    \end{tikzpicture}
+\caption{Metropole sends a wormhole to colony A}
+\end{figure}
+
+\begin{figure}[h]
+\hspace{-3cm}
+    \begin{tikzpicture}[tdplot_main_coords]
+
+            % draw grid
+            \foreach \x in {-6.5,-6,...,6.5}
+            \foreach \y in {-6.5,-6,...,6.5}
+            {
+                \draw[very thin,Aquamarine!10] (\x,-7,0) -- (\x,7,0);
+                \draw[very thin,Aquamarine!10] (-7,\y,0) -- (7,\y,0);
+            }
+            % draw 100 Ly circle:
+            \draw[thick,Aquamarine!50] (0,0,0) circle (6);
+
+            \draw[-latex] (7,-6.5,0) -- (3,-6.5,0) node[above left]{Spatial $x$}{};
+            \draw[-latex] (6.5,-7,0) -- (6.5,-3,0) node[below right]{Spatial $y$}{};
+            \draw[-latex] (6.5,-6.5,-0.5) -- (6.5,-6.5,3) node[above]{Temporal $t$}{};
+
+            \node[circle,fill, scale=1.5,label=below:Metropole] at (0,0,0) (R){};
+            \node[circle,fill, scale=1.5, label=right:$A$] at (xyz cylindrical cs: radius=6, angle=160,z=0) (A){};
+            \node[circle,fill, scale=1.5, label=left:$B$] at (xyz cylindrical cs: radius=6, angle=220,z=0) (B){};
+
+            \foreach \tstep in {0,-1,...,-6}
+            {
+                \node[circle,fill,Gray!10, scale=1.5, above=\tstep of A]{};
+            }
+            
+            \node[circle,fill, scale=1.5, label=above right:$A + 99.8596$ Years] at (xyz cylindrical cs: radius=6, angle=160,z=5.99) (AF){};
+            
+            \draw[thick,densely dotted] (R) -- (A);
+            \draw[thick,densely dotted] (R) -- (B);
+            \draw[thick,densely dotted] (A) -- (B);
+            
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,latitude=0) (w1){};
+            \node[] at (xyz cylindrical cs: radius=5.8, angle=160,z=0) (wB){};
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=5.8, angle=160,z=5.8) (w2){}; 
+            \draw[thick,densely dotted,Aquamarine!50!Black] (w1) -- node[below right]{\textcolor{Aquamarine!50!Black}{$d_{sp}(\text{WH 1}) = 100$ Ly}} (wB);
+            \draw[thick,densely dotted,Plum] (wB) -- node[below right]{\textcolor{Plum}{$d_{t}(\text{WH 1}) = 99.8596$ Years}} (w2);
+            \draw[thick,Peach] (w1) -- (w2);
+            
+    \end{tikzpicture}
+\caption{Space-Time positions of Wormhole 1}
+\end{figure}
+
+\begin{figure}[h]
+\hspace{-3cm}
+    \begin{tikzpicture}[tdplot_main_coords]
+
+            % draw grid
+            \foreach \x in {-6.5,-6,...,6.5}
+            \foreach \y in {-6.5,-6,...,6.5}
+            {
+                \draw[very thin,Aquamarine!10] (\x,-7,0) -- (\x,7,0);
+                \draw[very thin,Aquamarine!10] (-7,\y,0) -- (7,\y,0);
+            }
+            % draw 100 Ly circle:
+            \draw[thick,Aquamarine!50] (0,0,0) circle (6);
+
+            \draw[-latex] (7,-6.5,0) -- (3,-6.5,0) node[above left]{Spatial $x$}{};
+            \draw[-latex] (6.5,-7,0) -- (6.5,-3,0) node[below right]{Spatial $y$}{};
+            \draw[-latex] (6.5,-6.5,-0.5) -- (6.5,-6.5,3) node[above]{Temporal $t$}{};
+
+            \node[circle,fill, scale=1.5,label=below:Metropole] at (0,0,0) (R){};
+            \node[circle,fill, scale=1.5, label=right:$A$] at (xyz cylindrical cs: radius=6, angle=160,z=0) (A){};
+            \node[circle,fill, scale=1.5, label=left:$B$] at (xyz cylindrical cs: radius=6, angle=220,z=0) (B){};
+
+            \foreach \tstep in {0,-1,...,-6}
+            {
+                \node[circle,fill,Gray!10, scale=1.5, above=\tstep of A]{};
+            }
+            
+            \node[circle,fill, scale=1.5, label=above right:$A + 99.8596$ Years] at (xyz cylindrical cs: radius=6, angle=160,z=5.99) (AF){};
+            
+            \foreach \tstep in {0,-1,...,-13}
+            {
+                \node[circle,fill,Gray!10, scale=1.5, above=\tstep of R]{};
+            }
+            \node[circle,fill, scale=1.5, label=above left: Metropole $ + 199.7192$  Years] at (xyz cylindrical cs: radius=0, angle=0,z=11.99) (RF){};
+
+            %spatial triangle
+            \draw[thick,densely dotted] (R) -- (A);
+            \draw[thick,densely dotted] (R) -- (B);
+            \draw[thick,densely dotted] (A) -- (B);
+
+            % first wormhole connection            
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,z=0) (w1){};
+            \node[] at (xyz cylindrical cs: radius=5.8, angle=160,z=0) (wB){};
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=5.8, angle=160,z=5.8) (w2){}; 
+            \draw[thick,densely dotted,Aquamarine!50!Black] (w1) -- node[below right]{\textcolor{Aquamarine!50!Black}{$d_{sp}(\text{WH 1}) = 100$ Ly}} (wB);
+            \draw[thick,densely dotted,Plum] (wB) -- node[below right]{\textcolor{Plum}{$d_{t}(\text{WH 1}) = 99.8596$ Years}} (w2);
+            \draw[thick,Peach] (w1) -- (w2);
+
+            %second wormhole connection
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=5.8, angle=160,z=6.2) (w3){};
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,z=11.8) (w4){};
+            
+            \node[] at at (xyz cylindrical cs: radius=0.2, angle=160,z=6.2) (w2b){};
+            \draw[thick,densely dotted,Aquamarine!50!Black] (w3) -- (w2b.center);
+            \draw[thick,densely dotted,Plum] (w2b.center) -- node[below right=-1.3 and -1.1]{\textcolor{Plum}{$d_{t}(\text{WH 2}) = 99.8596$ Years}} (w4);
+            \draw[thick,Peach] (w3) -- (w4);
+    \end{tikzpicture}
+\caption{Sending a wormhole back from colony A}
+\end{figure}
+
+\begin{figure}[h]
+\hspace{-3cm}
+    \begin{tikzpicture}[tdplot_main_coords]
+
+            % draw grid
+            \foreach \x in {-6.5,-6,...,6.5}
+            \foreach \y in {-6.5,-6,...,6.5}
+            {
+                \draw[very thin,Aquamarine!10] (\x,-7,0) -- (\x,7,0);
+                \draw[very thin,Aquamarine!10] (-7,\y,0) -- (7,\y,0);
+            }
+            % draw 100 Ly circle:
+            \draw[thick,Aquamarine!50] (0,0,0) circle (6);
+
+            \draw[-latex] (7,-6.5,0) -- (3,-6.5,0) node[above left]{Spatial $x$}{};
+            \draw[-latex] (6.5,-7,0) -- (6.5,-3,0) node[below right]{Spatial $y$}{};
+            \draw[-latex] (6.5,-6.5,-0.5) -- (6.5,-6.5,3) node[above]{Temporal $t$}{};
+
+            \node[circle,fill, scale=1.5,label=below:Metropole] at (0,0,0) (R){};
+            \node[circle,fill, scale=1.5, label=right:$A$] at (xyz cylindrical cs: radius=6, angle=160,z=0) (A){};
+            \node[circle,fill, scale=1.5, label=left:$B$] at (xyz cylindrical cs: radius=6, angle=220,z=0) (B){};
+
+            \foreach \tstep in {0,-1,...,-6}
+            {
+                \node[circle,fill,Gray!10, scale=1.5, above=\tstep of A]{};
+            }
+            
+            \node[circle,fill, scale=1.5, label=above right:$A + 99.8596$ Years] at (xyz cylindrical cs: radius=6, angle=160,z=5.99) (AF){};
+            
+            \foreach \tstep in {0,-1,...,-13}
+            {
+                \node[circle,fill,Gray!10, scale=1.5, above=\tstep of R]{};
+            }
+            \node[circle,fill, scale=1.5, label=above left: Metropole $ + 199.7192$  Years] at (xyz cylindrical cs: radius=0, angle=0,z=11.99) (RF){};
+
+            %spatial triangle
+            \draw[thick,densely dotted] (R) -- (A);
+            \draw[thick,densely dotted] (R) -- (B);
+            \draw[thick,densely dotted] (A) -- (B);
+
+            % first wormhole connection            
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,z=0) (w1){};
+            \node[] at (xyz cylindrical cs: radius=5.8, angle=160,z=0) (wB){};
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=5.8, angle=160,z=5.8) (w2){}; 
+            \draw[thick,densely dotted,Aquamarine!50!Black] (w1) -- node[below right]{\textcolor{Aquamarine!50!Black}{$d_{sp}(\text{WH 1}) = 100$ Ly}} (wB);
+            \draw[thick,densely dotted,Plum] (wB) -- node[below right]{\textcolor{Plum}{$d_{t}(\text{WH 1}) = 99.8596$ Years}} (w2);
+            \draw[thick,Peach] (w1) -- (w2);
+
+            %second wormhole connection
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=5.8, angle=160,z=6.2) (w3){};
+            \node[circle,fill,Peach,minimum size=1mm] at (xyz cylindrical cs: radius=0.2, angle=160,z=11.8) (w4){};
+            
+            \node[] at at (xyz cylindrical cs: radius=0.2, angle=160,z=6.2) (w2b){};
+            \draw[thick,densely dotted,Aquamarine!50!Black] (w3) -- (w2b.center);
+            \draw[thick,densely dotted,Plum] (w2b.center) -- node[below right=-1.3 and -1.1]{\textcolor{Plum}{$d_{t}(\text{WH 2}) = 99.8596$ Years}} (w4);
+            \draw[thick,Peach] (w3) -- (w4);
+            
+            %the CTC connection
+            \node[circle,fill,ProcessBlue] at (xyz cylindrical cs: radius=0.5, angle=340,z=12) (ctcN1) {};
+            \node[circle,fill,ProcessBlue] at (xyz cylindrical cs: radius=6.5, angle=160,z=6) (ctcN2) {};
+            \node[circle,fill,ProcessBlue] at (xyz cylindrical cs: radius=0.5, angle=340,z=0) (ctcN3) {};
+            \draw[ProcessBlue, very thick, rounded corners,-latex] (ctcN1) -- (w4) -- (w3) -- (ctcN2) -- (w2) -- (w1) -- (ctcN3);
+            \draw[ProcessBlue, very thick,-latex,label=left: closing the CTC] (ctcN3) -- (ctcN1);
+
+            
+    \end{tikzpicture}
+\caption{A possible CTC connection}
+\end{figure}
+
+ 
+
+\end{document}
